@@ -96,7 +96,7 @@ public class ListaComprasActivity extends AppCompatActivity {
         dao.close();
 
         listaCompras = (ListView) findViewById(R.id.lista_compras);
-        ArrayAdapter<Produto> adapter = new ArrayAdapter<Produto>(this, android.R.layout.simple_list_item_1, listaProdutos);
+        AdapterListaCompras adapter = new AdapterListaCompras(this, listaProdutos);
         listaCompras.setAdapter(adapter);
     }
 

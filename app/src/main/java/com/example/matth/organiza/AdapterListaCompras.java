@@ -1,6 +1,7 @@
 package com.example.matth.organiza;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -42,10 +43,23 @@ public class AdapterListaCompras extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = act.getLayoutInflater().inflate(R.layout.activity_lista_compras, parent, false);
+        View v = act.getLayoutInflater().inflate(R.layout.lista_personalizada, parent, false);
         Produto p = produtos.get(position);
 
+        TextView nome = (TextView) v.findViewById(R.id.lista_personalizada_nome);
+        TextView unidade = (TextView) v.findViewById(R.id.lista_personalizada_unidade);
+        TextView quantidade = (TextView) v.findViewById(R.id.lista_personalizada_quantidade);
 
+        nome.setText(p.getNome());
+        unidade.setText(p.getUnidade());
+        quantidade.setText(String.valueOf(p.getQuantidade()));
+
+
+        if(p.getBooleano() == 1){
+            v.setBackgroundColor(Color.GREEN);
+        }else if(p.getBooleano() == 0){
+            v.setBackgroundColor(Color.TRANSPARENT);
+        }
 
         return v;
     }
