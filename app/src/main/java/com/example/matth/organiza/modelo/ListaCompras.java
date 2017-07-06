@@ -14,7 +14,7 @@ public class ListaCompras implements Serializable {
 
     @Override
     public String toString() {
-        return this.id + " - " + this.nome;
+        return this.nome;
     }
 
     public Long getId() {

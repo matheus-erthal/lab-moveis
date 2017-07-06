@@ -3,6 +3,9 @@ package com.example.matth.organiza;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -49,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        registerForContextMenu(listas);
+
     }
 
     private void setaLista(){
@@ -61,6 +66,25 @@ public class MainActivity extends AppCompatActivity {
         listas.setAdapter(adapter);
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
+        MenuItem excluir = menu.add("Excluir lista");
+
+        excluir.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener(){
+
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+                ListaCompras l = (ListaCompras) listas.getItemAtPosition(info.position);
+                ListaComprasDAO dao = new ListaComprasDAO(MainActivity.this);
+                dao.deletaLista(l);
+                dao.close();
+                setaLista();
+                Toast.makeText(MainActivity.this, "Produto deletado", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+    }
 
     @Override
     protected void onResume() {

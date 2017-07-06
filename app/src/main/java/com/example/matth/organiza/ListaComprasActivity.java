@@ -108,8 +108,9 @@ public class ListaComprasActivity extends AppCompatActivity {
 
     @Override
     public void onCreateContextMenu(final ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
-        MenuItem excluir = menu.add("Excluir produto");
+
         MenuItem editar = menu.add("Editar produto");
+        MenuItem excluir = menu.add("Excluir produto");
 
         excluir.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener(){
             @Override
@@ -134,8 +135,8 @@ public class ListaComprasActivity extends AppCompatActivity {
                 Produto p = (Produto) listaCompras.getItemAtPosition(info.position);
                 Intent intentVaiProForm = new Intent(ListaComprasActivity.this, FormularioActivity.class);
                 intentVaiProForm.putExtra("produto", p);
+                intentVaiProForm.putExtra("lista", listaCompra);
                 startActivity(intentVaiProForm);
-                Toast.makeText(ListaComprasActivity.this, "Fon", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });

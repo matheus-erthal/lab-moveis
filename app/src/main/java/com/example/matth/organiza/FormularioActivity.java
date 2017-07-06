@@ -25,8 +25,11 @@ public class FormularioActivity extends AppCompatActivity {
         ListaCompras lista = (ListaCompras)  intentLista.getSerializableExtra("lista");
         listaCompra = lista;
         helper = new FormularioHelper(this);
-        Toast.makeText(FormularioActivity.this, "Teste: "+lista.getNome(), Toast.LENGTH_SHORT).show();
-    }
+        Produto produto = (Produto) intentLista.getSerializableExtra("produto");
+        if(produto != null){
+            helper.preencheForm(produto);
+        }
+        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -41,10 +44,14 @@ public class FormularioActivity extends AppCompatActivity {
             case R.id.menu_formulario_ok:
                 Produto produto = helper.pegaProduto(listaCompra.getId());
                 ProdutoDAO dao = new ProdutoDAO(this);
-                dao.insere(produto);
+                if(produto.getId() != null){
+                    dao.altera(produto, listaCompra.getId());
+                    Toast.makeText(FormularioActivity.this, "Item "+produto.getNome()+" alterado!", Toast.LENGTH_SHORT).show();
+                }else{
+                    dao.insere(produto);
+                    Toast.makeText(FormularioActivity.this, "Item "+produto.getNome()+" criado!", Toast.LENGTH_SHORT).show();
+                }
                 dao.close();
-                Toast.makeText(FormularioActivity.this, "Item "+produto.getNome()+" criado!", Toast.LENGTH_SHORT).show();
-
 
                 finish();
                 break;

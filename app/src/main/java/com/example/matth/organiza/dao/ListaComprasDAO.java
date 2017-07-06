@@ -57,6 +57,12 @@ public class ListaComprasDAO extends SQLiteOpenHelper {
         return listas;
     }
 
+    public void deletaLista(ListaCompras l) {
+        SQLiteDatabase db = getWritableDatabase();
+        String[] params = {String.valueOf(l.getId())};
+        db.delete("lista", "id = ?", params);
+
+    }
 
 
 
