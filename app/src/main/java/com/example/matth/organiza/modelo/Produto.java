@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class Produto implements Serializable{
 
-    private Long id;
+    private long id;
     private String nome;
     private String unidade;
     private double quantidade;

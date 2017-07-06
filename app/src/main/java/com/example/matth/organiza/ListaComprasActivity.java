@@ -46,11 +46,11 @@ public class ListaComprasActivity extends AppCompatActivity {
                 if(p.getBooleano() == 0){
                     listaCompras.getChildAt(position).setBackgroundColor(Color.GREEN);
                     p.setBooleano(1);
-                    dao.altera(p);
+                    dao.altera(p, listaCompra.getId());
                 }else if(p.getBooleano() == 1){
                     listaCompras.getChildAt(position).setBackgroundColor(Color.TRANSPARENT);
                     p.setBooleano(0);
-                    dao.altera(p);
+                    dao.altera(p, listaCompra.getId());
                 }
                 dao.close();
             }

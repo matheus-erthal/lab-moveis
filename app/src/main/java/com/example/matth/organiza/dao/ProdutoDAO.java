@@ -48,15 +48,16 @@ public class ProdutoDAO extends SQLiteOpenHelper {
 
     }
 
-    public void altera(Produto produto){
+    public void altera(Produto produto, long id){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues dados = new ContentValues();
         dados.put("nome", produto.getNome());
         dados.put("unidade", produto.getUnidade());
         dados.put("quantidade", produto.getQuantidade());
-        dados.put("lista_id", produto.getLista_id());
+        dados.put("lista_id", id);
         dados.put("booleano", produto.getBooleano());
-        db.update("produto", dados, "id ="+ produto.getId(), null);
+        String[] params = {String.valueOf(produto.getId())};
+        db.update("produto", dados, "id = ?", params);
 
     }
 

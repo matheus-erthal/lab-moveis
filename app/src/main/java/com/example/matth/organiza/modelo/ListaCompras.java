@@ -10,7 +10,7 @@ import java.util.List;
 public class ListaCompras implements Serializable {
 
     private String nome;
-    private Long id;
+    private long id;
 
     @Override
     public String toString() {
